@@ -1,0 +1,52 @@
+{
+  "configurations": [
+    {
+      "type": "python",
+      "name": "debug preprocess.py",
+      "request": "launch",
+      "justMyCode": false,
+      "args": [],
+      "program": "c:\\project3\\mic_MVDR\\src\\preprocess.py"
+    },
+    {
+      "type": "python",
+      "name": "debug preprocess copy.py",
+      "request": "launch",
+      "justMyCode": false,
+      "args": [],
+      "program": "c:\\project3\\mic_MVDR\\src\\preprocess copy.py"
+    },
+    {
+      "type": "python",
+      "name": "debug rms-preprocess.py",
+      "request": "launch",
+      "justMyCode": false,
+      "args": [],
+      "program": "c:\\project3\\mic_MVDR\\src\\rms-preprocess.py"
+    },
+    {
+      "type": "python",
+      "name": "debug plotSignal.py",
+      "request": "launch",
+      "justMyCode": false,
+      "args": [],
+      "program": "c:\\project3\\mic_MVDR\\src\\plotSignal.py"
+    },
+    {
+      "type": "python",
+      "name": "debug DSB.py",
+      "request": "launch",
+      "justMyCode": false,
+      "args": [],
+      "program": "c:\\project3\\mic_MVDR\\src\\DSB.py"
+    },
+    {
+      "type": "python",
+      "name": "debug MVDR.py",
+      "request": "launch",
+      "justMyCode": false,
+      "args": [],
+      "program": "c:\\project3\\mic_MVDR\\src\\MVDR.py"
+    }
+  ]
+}
