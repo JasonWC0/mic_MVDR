@@ -1,3 +1,5 @@
 myenv/*
+.vscode/*
 #PREPROCESSED_TDM/*
 #TDM/*
+
