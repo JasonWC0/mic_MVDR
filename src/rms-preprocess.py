@@ -5,9 +5,9 @@ import os
 
 # 定義三個麥克風的檔案路徑模式
 mic_patterns = {
-    'mic1': './TDM/mic1/wear*-1_timeDM.csv',
-    'mic2': './TDM/mic2/wear*-2_timeDM.csv',
-    'mic3': './TDM/mic3/wear*-3_timeDM.csv'
+    'mic1': './TDM_ANGLE_30/mic1/wear*-1_timeDM.csv',
+    'mic2': './TDM_ANGLE_30/mic2/wear*-2_timeDM.csv',
+    'mic3': './TDM_ANGLE_30/mic3/wear*-3_timeDM.csv'
 }
 output_base_folder = './PREPROCESSED_TDM/'
 
