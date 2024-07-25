@@ -3,22 +3,25 @@ import numpy as np
 import glob
 import os
 
+# 定義數據文件夾
+DATA_FOLDER = './TDM_ANGLE_30/'
+OUTPUT_BASE_FOLDER = './PREPROCESSED_TDM/'
 # 定義三個麥克風的檔案路徑模式
+
 mic_patterns = {
-    'mic1': './TDM_ANGLE_30/mic1/wear*-1_timeDM.csv',
-    'mic2': './TDM_ANGLE_30/mic2/wear*-2_timeDM.csv',
-    'mic3': './TDM_ANGLE_30/mic3/wear*-3_timeDM.csv'
+	'mic1': f'{DATA_FOLDER}mic1/wear*-1_timeDM.csv',
+	'mic2': f'{DATA_FOLDER}mic2/wear*-2_timeDM.csv',
+	'mic3': f'{DATA_FOLDER}mic3/wear*-3_timeDM.csv'
 }
-output_base_folder = './PREPROCESSED_TDM/'
 
 # 確保輸出資料夾存在
 for mic in mic_patterns:
-    output_folder = os.path.join(output_base_folder, mic)
+    output_folder = os.path.join(OUTPUT_BASE_FOLDER, mic)
     os.makedirs(output_folder, exist_ok=True)
 
 # 讀取並處理每個麥克風的檔案
 for mic, file_pattern in mic_patterns.items():
-    output_folder = os.path.join(output_base_folder, mic)
+    output_folder = os.path.join(OUTPUT_BASE_FOLDER, mic)
     all_files = sorted(glob.glob(file_pattern))  # 使用 sorted 保持檔案順序
 
     for file in all_files:

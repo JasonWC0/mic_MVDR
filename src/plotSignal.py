@@ -13,10 +13,10 @@ data2 = pd.read_csv(file_path2, header=None, names=['seconds', 'magnitude'])
 plt.figure(figsize=(10, 5))
 
 # 原始波形
-#plt.plot(data['seconds'], data['magnitude'], label='original wave')
+plt.plot(data['seconds'], data['magnitude'], label='original wave')
 
 # 準位均化後的波形
-plt.plot(data2['seconds'], data2['magnitude'], label='after normalization')
+#plt.plot(data2['seconds'], data2['magnitude'], label='after normalization')
 
 # 設置圖表標題和標籤
 plt.title('波形對比圖')

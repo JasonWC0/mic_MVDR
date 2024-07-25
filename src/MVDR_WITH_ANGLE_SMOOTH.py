@@ -78,6 +78,10 @@ w_mvdr = R_inv @ d / (d.T @ R_inv @ d)
 # 進行 MVDR 波束形成
 mvdr_signal = w_mvdr @ X
 
+# 平滑函數
+def smooth(data, window_size):
+    return np.convolve(data, np.ones(window_size)/window_size, mode='valid')
+
 # 計算傅里葉變換
 def compute_fft(signal, sample_rate):
     N = len(signal)
@@ -91,6 +95,11 @@ xf_mic2, yf_mic2 = compute_fft(data_mic2['波的大小'].values, sample_rate)
 xf_mic3, yf_mic3 = compute_fft(data_mic3['波的大小'].values, sample_rate)
 xf_mvdr, yf_mvdr = compute_fft(mvdr_signal, sample_rate)
 
+# 應用頻域平滑
+frequency_smoothing_window_size = int(100 / (xf_mvdr[1] - xf_mvdr[0]))  # 計算頻率窗口大小
+yf_mvdr_smoothed = smooth(yf_mvdr, frequency_smoothing_window_size)
+xf_mvdr_smoothed = xf_mvdr[:len(yf_mvdr_smoothed)]  # 調整頻率軸以匹配平滑後的數據
+
 # 計算能量
 def compute_energy(signal):
     return np.sum(signal ** 2)
@@ -100,7 +109,6 @@ energy_mic2 = compute_energy(data_mic2['波的大小'].values)
 energy_mic3 = compute_energy(data_mic3['波的大小'].values)
 energy_mvdr = compute_energy(mvdr_signal)
 
-# 繪製三個麥克風的原始波形和 MVDR 後的波形（時間域和頻域）
 # 繪製三個麥克風的原始波形和 MVDR 後的波形（時間域和頻域）
 plt.figure(figsize=(15, 20))
 
@@ -161,7 +169,7 @@ plt.legend()
 plt.grid(True)
 
 plt.subplot(4, 2, 8)
-plt.plot(xf_mvdr, yf_mvdr, label='MVDR 波束形成信號')
+plt.plot(xf_mvdr_smoothed, yf_mvdr_smoothed, label='MVDR 波束形成信號 (平滑後)')
 plt.title('MVDR 波束形成 (頻域)')
 plt.xlabel('頻率 (Hz)')
 plt.ylabel('幅度')
@@ -171,4 +179,3 @@ plt.grid(True)
 plt.tight_layout(pad=3.0)  # 增加圖表之間的間距
 plt.subplots_adjust(hspace=1)  # 增加第一列和第二列之間的間距
 plt.show()
-
