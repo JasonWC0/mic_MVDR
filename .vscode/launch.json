@@ -103,6 +103,14 @@
 		"justMyCode": false,
 		"args": [],
 		"program": "c:\\project3\\mic_MVDR\\src\\SVM.py"
+	},
+	{
+		"type": "python",
+		"name": "debug smooth_signal.py",
+		"request": "launch",
+		"justMyCode": false,
+		"args": [],
+		"program": "c:\\project3\\mic_MVDR\\src\\smooth_signal.py"
 	}
 ]
 }
