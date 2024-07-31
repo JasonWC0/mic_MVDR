@@ -79,6 +79,38 @@
 		"justMyCode": false,
 		"args": [],
 		"program": "c:\\project3\\mic_MVDR\\src\\MVDR_WITH_ANGLE copy.py"
+	},
+	{
+		"type": "python",
+		"name": "debug MVDR_WITH_ANGLE_SMOOTH.py",
+		"request": "launch",
+		"justMyCode": false,
+		"args": [],
+		"program": "c:\\project3\\mic_MVDR\\src\\MVDR_WITH_ANGLE_SMOOTH.py"
+	},
+	{
+		"type": "python",
+		"name": "debug MVDR_WITH_ANGLE_SAVE_DATA.py",
+		"request": "launch",
+		"justMyCode": false,
+		"args": [],
+		"program": "c:\\project3\\mic_MVDR\\src\\MVDR_WITH_ANGLE_SAVE_DATA.py"
+	},
+	{
+		"type": "python",
+		"name": "debug SVM.py",
+		"request": "launch",
+		"justMyCode": false,
+		"args": [],
+		"program": "c:\\project3\\mic_MVDR\\src\\SVM.py"
+	},
+	{
+		"type": "python",
+		"name": "debug smooth_signal.py",
+		"request": "launch",
+		"justMyCode": false,
+		"args": [],
+		"program": "c:\\project3\\mic_MVDR\\src\\smooth_signal.py"
 	}
 ]
 }

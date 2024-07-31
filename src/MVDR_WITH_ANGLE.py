@@ -9,9 +9,9 @@ plt.rcParams['font.family'] = 'STFangsong'  # 替換為你選擇的字體
 
 # 讀取三個麥克風的數據
 mic_files = {
-    'mic1': './PREPROCESSED_TDM/mic1/wear1-1_timeDM.csv',
-    'mic2': './PREPROCESSED_TDM/mic2/wear1-2_timeDM.csv',
-    'mic3': './PREPROCESSED_TDM/mic3/wear1-3_timeDM.csv'
+    'mic1': './PREPROCESSED_TDM/mic1/wear5-1_timeDM.csv',
+    'mic2': './PREPROCESSED_TDM/mic2/wear5-2_timeDM.csv',
+    'mic3': './PREPROCESSED_TDM/mic3/wear5-3_timeDM.csv'
 }
 
 data_mic1 = pd.read_csv(mic_files['mic1'], header=None, names=['秒數', '波的大小'])
