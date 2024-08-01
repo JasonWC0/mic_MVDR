@@ -3,6 +3,7 @@ import numpy as np
 import glob
 import os
 
+# 準位均化
 # Iterate over i from 1 to 4
 for i in range(1, 5):
 	DATA_FOLDER = f'./TDM{i}/'
@@ -33,11 +34,14 @@ for i in range(1, 5):
 			
 			# Normalize the data
 			data['波的大小'] = data['波的大小'] / rms_value
+
+			data_with_header = pd.DataFrame({'time': data['秒數'], 'Amplitude': data['波的大小']})
+
 			
 			# Generate output file name
 			output_file = os.path.join(output_folder, os.path.basename(file))
 			
 			# Save the normalized data
-			data.to_csv(output_file, index=False, header=False)
+			data_with_header.to_csv(output_file, index=False, header=True)
 
 			print(f'Processed and saved: {output_file}')
