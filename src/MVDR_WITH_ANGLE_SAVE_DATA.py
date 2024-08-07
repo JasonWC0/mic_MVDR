@@ -34,9 +34,9 @@ for j in range(1, 5):  # Loop for j from 1 to 4
 
 	os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 	# 定義每個麥克風到聲源的距離 (單位：米)
-	distance_mic1 = 1.00  # 假設麥克風1到聲源的距離為0.98米
-	distance_mic2 = 1.00  # 假設麥克風2到聲源的距離為1.02米
-	distance_mic3 = 1.00  # 假設麥克風3到聲源的距離為0.98米
+	distance_mic1 = 1.0  # 假設麥克風1到聲源的距離為1米
+	distance_mic2 = 1.0  # 假設麥克風2到聲源的距離為1米
+	distance_mic3 = 1.0  # 假設麥克風3到聲源的距離為1米
 
 	# 計算聲速
 	sound_speed = 343  # 聲速 (單位：米/秒)
@@ -50,18 +50,18 @@ for j in range(1, 5):  # Loop for j from 1 to 4
 			'mic2': f'./{INPUT_FOLDER}/mic2/wear{i}-2_timeDM.csv',
 			'mic3': f'./{INPUT_FOLDER}/mic3/wear{i}-3_timeDM.csv'
 		}
-        #time秒數，Amplitude為波的大小(這裡用電壓)
-		data_mic1 = pd.read_csv(mic_files['mic1'], names=['time', 'Amplitude'],skiprows=1)
-		data_mic2 = pd.read_csv(mic_files['mic2'], names=['time', 'Amplitude'],skiprows=1)
-		data_mic3 = pd.read_csv(mic_files['mic3'], names=['time', 'Amplitude'],skiprows=1)
+
+		data_mic1 = pd.read_csv(mic_files['mic1'], header=None, names=['秒數', '波的大小'], skiprows=1)
+		data_mic2 = pd.read_csv(mic_files['mic2'], header=None, names=['秒數', '波的大小'], skiprows=1)
+		data_mic3 = pd.read_csv(mic_files['mic3'], header=None, names=['秒數', '波的大小'], skiprows=1)
 
 		# 計算採樣率
-		sample_rate = 1 / (data_mic1['time'].iloc[1] - data_mic1['time'].iloc[0])
+		sample_rate = 1 / (data_mic1['秒數'].iloc[1] - data_mic1['秒數'].iloc[0])
 
 		# 應用濾波器
-		data_mic1_filtered = lowpass_filter(data_mic1['Amplitude'].values, CUTOFF_FREQUENCY, sample_rate)
-		data_mic2_filtered = lowpass_filter(data_mic2['Amplitude'].values, CUTOFF_FREQUENCY, sample_rate)
-		data_mic3_filtered = lowpass_filter(data_mic3['Amplitude'].values, CUTOFF_FREQUENCY, sample_rate)
+		data_mic1_filtered = lowpass_filter(data_mic1['波的大小'].values, CUTOFF_FREQUENCY, sample_rate)
+		data_mic2_filtered = lowpass_filter(data_mic2['波的大小'].values, CUTOFF_FREQUENCY, sample_rate)
+		data_mic3_filtered = lowpass_filter(data_mic3['波的大小'].values, CUTOFF_FREQUENCY, sample_rate)
 
 		# 計算每個麥克風的延遲時間
 		delay_mic1 = distance_mic1 / sound_speed
@@ -95,7 +95,7 @@ for j in range(1, 5):  # Loop for j from 1 to 4
 		mvdr_signal = w_mvdr @ X
 
 		# 儲存 MVDR 結果
-		mvdr_data = pd.DataFrame({'time': data_mic1['time'], 'Amplitude': mvdr_signal.real})
+		mvdr_data = pd.DataFrame({'秒數': data_mic1['秒數'], '波的大小': mvdr_signal.real})
 		output_file_path = os.path.join(OUTPUT_FOLDER, f'micAll_wear{i}_filtered.csv')
 		mvdr_data.to_csv(output_file_path, index=False)
 
