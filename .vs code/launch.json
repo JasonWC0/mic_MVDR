@@ -6,7 +6,7 @@
 			"request": "launch",
 			"justMyCode": false,
 			"args": [],
-			"program": "C:\\Users\\NTU138\\Desktop\\mic_MVDR\\src\\preprocess.py"
+			"program": "C:\\Users\\NTU138\\Desktop\\R11522735_Lien\\mic_MVDR\\src\\preprocess.py"
 		},
 		{
 			"type": "python",
@@ -14,7 +14,7 @@
 			"request": "launch",
 			"justMyCode": false,
 			"args": [],
-			"program": "C:\\Users\\NTU138\\Desktop\\mic_MVDR\\src\\preprocess copy.py"
+			"program": "C:\\Users\\NTU138\\Desktop\\R11522735_Lien\\mic_MVDR\\src\\preprocess copy.py"
 		},
 		{
 			"type": "python",
@@ -22,7 +22,7 @@
 			"request": "launch",
 			"justMyCode": false,
 			"args": [],
-			"program": "C:\\Users\\NTU138\\Desktop\\mic_MVDR\\src\\rms-preprocess.py"
+			"program": "C:\\Users\\NTU138\\Desktop\\R11522735_Lien\\mic_MVDR\\src\\rms-preprocess.py"
 		},
 		{
 			"type": "python",
@@ -30,7 +30,7 @@
 			"request": "launch",
 			"justMyCode": false,
 			"args": [],
-			"program": "C:\\Users\\NTU138\\Desktop\\mic_MVDR\\src\\plotSignal.py"
+			"program": "C:\\Users\\NTU138\\Desktop\\R11522735_Lien\\mic_MVDR\\src\\plotSignal.py"
 		},
 		{
 			"type": "python",
@@ -38,7 +38,7 @@
 			"request": "launch",
 			"justMyCode": false,
 			"args": [],
-			"program": "C:\\Users\\NTU138\\Desktop\\mic_MVDR\\src\\DSB.py"
+			"program": "C:\\Users\\NTU138\\Desktop\\R11522735_Lien\\mic_MVDR\\src\\DSB.py"
 		},
 		{
 			"type": "python",
@@ -46,7 +46,7 @@
 			"request": "launch",
 			"justMyCode": false,
 			"args": [],
-			"program": "C:\\Users\\NTU138\\Desktop\\mic_MVDR\\src\\MVDR.py"
+			"program": "C:\\Users\\NTU138\\Desktop\\R11522735_Lien\\mic_MVDR\\src\\MVDR.py"
 		},
 		{
 			"type": "python",
@@ -54,7 +54,7 @@
 			"request": "launch",
 			"justMyCode": false,
 			"args": [],
-			"program": "c:\\Users\\NTU138\\Desktop\\mic_MVDR\\src\\MVDR_WITH_ANGLE.py"
+			"program": "c:\\Users\\NTU138\\Desktop\\R11522735_Lien\\mic_MVDR\\src\\MVDR_WITH_ANGLE.py"
 		}
 	]
   }
