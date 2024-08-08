@@ -2,11 +2,53 @@ import pandas as pd
 import numpy as np
 import glob
 import os
+from scipy.signal import butter, lfilter
+
+
+def butter_lowpass(cutoff, fs, order=5):
+    nyq = 0.5 * fs
+    normal_cutoff = cutoff / nyq
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    return b, a
+
+def butter_lowpass_filter(data, cutoff, fs, order=5):
+    b, a = butter_lowpass(cutoff, fs, order=order)
+    y = lfilter(b, a, data)
+    return y
+
+def butter_highpass(cutoff, fs, order=5):
+    nyq = 0.5 * fs
+    normal_cutoff = cutoff / nyq
+    b, a = butter(order, normal_cutoff, btype='high', analog=False)
+    return b, a
+
+def butter_highpass_filter(data, cutoff, fs, order=5):
+    b, a = butter_highpass(cutoff, fs, order=order)
+    y = lfilter(b, a, data)
+    return y
+
+def bandpass_filter(data, lowcut, highcut, fs, order=5):
+    """
+    應用帶通濾波器
+
+    :param data: 輸入信號
+    :param lowcut: 低通截止頻率
+    :param highcut: 高通截止頻率
+    :param fs: 取樣頻率
+    :param order: 濾波器的階數
+    :return: 濾波後的信號
+    """
+    filtered_highpass = butter_highpass_filter(data, highcut, fs, order)
+    filtered_bandpass = butter_lowpass_filter(filtered_highpass, lowcut, fs, order)
+    return filtered_bandpass
 
 # Iterate over i from 1 to 4
 for i in range(1, 2):
     DATA_FOLDER = f'./TDM{i}/'
     OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_STEP01_{i}/'
+    HIGH_PASS_CUTOFF = 10
+    LOW_PASS_CUTOFF = 20000
+    FS=51200
     
     # Define the mic_patterns for each i
     mic_patterns = {
@@ -43,6 +85,10 @@ for i in range(1, 2):
         print('rms1',rms1)
         print('rms2',np.sqrt(np.mean(data2['Amplitude']**2)))
         print('rms3',np.sqrt(np.mean(data3['Amplitude']**2)))
+        
+        data1['Amplitude'] = bandpass_filter(data1['Amplitude'], LOW_PASS_CUTOFF, HIGH_PASS_CUTOFF, FS)
+        data2['Amplitude'] = bandpass_filter(data2['Amplitude'], LOW_PASS_CUTOFF, HIGH_PASS_CUTOFF, FS)
+        data3['Amplitude'] = bandpass_filter(data3['Amplitude'], LOW_PASS_CUTOFF, HIGH_PASS_CUTOFF, FS)
 
 
         # Save the normalized data
