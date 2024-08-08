@@ -4,7 +4,7 @@ import glob
 import os
 
 # Iterate over i from 1 to 4
-for i in range(1, 5):
+for i in range(1, 2):
     DATA_FOLDER = f'./TDM{i}/'
     OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_STEP01_{i}/'
     
@@ -27,18 +27,23 @@ for i in range(1, 5):
     
     for f1, f2, f3 in zip(mic1_files, mic2_files, mic3_files):
         # Read and calculate RMS for mic1 current file
-        data1 = pd.read_csv(f1, header=None, names=['秒數', '波的大小'])
-        rms1 = np.sqrt(np.mean(data1['波的大小']**2))
+        data1 = pd.read_csv(f1, header=None, names=['Time', 'Amplitude'])
+        rms1 = np.sqrt(np.mean(data1['Amplitude']**2))
 
         # Normalize mic2 using mic1's current RMS
-        data2 = pd.read_csv(f2, header=None, names=['秒數', '波的大小'])
-        rms2 = np.sqrt(np.mean(data2['波的大小']**2))
-        data2['波的大小'] = data2['波的大小'] * (rms1 / rms2)
+        data2 = pd.read_csv(f2, header=None, names=['Time', 'Amplitude'])
+        rms2 = np.sqrt(np.mean(data2['Amplitude']**2))
+        data2['Amplitude'] = data2['Amplitude'] * (rms1 / rms2)
 
         # Normalize mic3 using mic1's current RMS
-        data3 = pd.read_csv(f3, header=None, names=['秒數', '波的大小'])
-        rms3 = np.sqrt(np.mean(data3['波的大小']**2))
-        data3['波的大小'] = data3['波的大小'] * (rms1 / rms3)
+        data3 = pd.read_csv(f3, header=None, names=['Time', 'Amplitude'])
+        rms3 = np.sqrt(np.mean(data3['Amplitude']**2))
+        data3['Amplitude'] = data3['Amplitude'] * (rms1 / rms3)
+
+        print('rms1',rms1)
+        print('rms2',np.sqrt(np.mean(data2['Amplitude']**2)))
+        print('rms3',np.sqrt(np.mean(data3['Amplitude']**2)))
+
 
         # Save the normalized data
         data1.to_csv(os.path.join(OUTPUT_BASE_FOLDER, 'mic1', os.path.basename(f1)), index=False, header=True)

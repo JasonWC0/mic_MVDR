@@ -11,7 +11,7 @@ PROCESS_CSV_FILE_NAME = 'micAll_wear{}_filtered.csv'
 output_dir = f'././{TARGET_FILE_NAME}_SMOOTH'
 
 # 定義平滑和下採樣的點數
-point = 1000
+point = 100
 
 def downsample_and_smooth(frequency, amplitude, point):
     downsampled_frequency = []

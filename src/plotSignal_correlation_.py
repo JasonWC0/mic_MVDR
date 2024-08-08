@@ -2,19 +2,23 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+# 設置 matplotlib 使用支持中文的字體
+plt.rcParams['font.family'] = ['Microsoft JhengHei']  # 或者 'SimHei', 'STFangsong'
+plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
+
 # 讀取原始 CSV 檔案並指定標題
-file_path = './MVDR_TDM1_FFT/micAll_wear1_filtered.csv'
-data = pd.read_csv(file_path, header=None, names=['seconds', 'magnitude'])
+file_path = './MVDR_TDM1_FFT_SMOOTH/micAll_wear1_filtered.csv'
+data = pd.read_csv(file_path, header=None, names=['seconds', 'magnitude'], skiprows=1)
 
 # 讀取準位均化後的 CSV 檔案
-file_path2 = './MVDR_TDM1_FFT_SMOOTH/micAll_wear1_filtered.csv'
-data2 = pd.read_csv(file_path2, header=None, names=['seconds', 'magnitude'])
+file_path2 = './MVDR_TDM1_FFT_SMOOTH/micAll_wear2_filtered.csv'
+data2 = pd.read_csv(file_path2, header=None, names=['seconds', 'magnitude'], skiprows=1)
 
 # 繪製對比波形
 plt.figure(figsize=(10, 5))
 
 # 原始波形
-#plt.plot(data['seconds'], data['magnitude'], label='original wave')
+plt.plot(data['seconds'], data['magnitude'], label='original wave')
 
 # 準位均化後的波形
 plt.plot(data2['seconds'], data2['magnitude'], label='after normalization')

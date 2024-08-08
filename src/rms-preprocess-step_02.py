@@ -20,7 +20,7 @@ def adjust_data(data):
     return data
 
 # Iterate over i from 1 to 4
-for i in range(1, 5):
+for i in range(1, 2):
     DATA_FOLDER = f'./PREPROCESSED_TDM_STEP01_{i}/'
     OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_STEP02_{i}/'
     
