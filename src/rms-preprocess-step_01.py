@@ -5,8 +5,8 @@ import os
 
 # Iterate over i from 1 to 4
 for i in range(1, 2):
-    DATA_FOLDER = f'./TDM{i}/'
-    OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_STEP01_{i}/'
+    DATA_FOLDER = f'./TDM{i}_ANGLE_30/'
+    OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM{i}_ANGLE_30_STEP01/'
     
     # Define the mic_patterns for each i
     mic_patterns = {
