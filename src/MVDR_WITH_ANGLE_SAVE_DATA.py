@@ -27,16 +27,16 @@ for j in range(1, 2):  # Loop for j from 1 to 4
 	print(f'處理第 {j} 組數據...')
 
 	# 設置輸入文件夾
-	INPUT_FOLDER = f'./PREPROCESSED_TDM_STEP01_{j}/'
+	INPUT_FOLDER = f'./PREPROCESSED_TDM{j}_ANGLE_30_STEP01/'
 
 	# 設置輸出文件夾
-	OUTPUT_FOLDER = f'./MVDR_TDM{j}/'
+	OUTPUT_FOLDER = f'./MVDR_TDM{j}_ANGLE_30/'
 
 	os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 	# 定義每個麥克風到聲源的距離 (單位：米)
-	distance_mic1 = 1.0  # 假設麥克風1到聲源的距離為1米
-	distance_mic2 = 1.0  # 假設麥克風2到聲源的距離為1米
-	distance_mic3 = 1.0  # 假設麥克風3到聲源的距離為1米
+	distance_mic1 = 0.98  # 假設麥克風1到聲源的距離為0.98米
+	distance_mic2 = 1.02  # 假設麥克風2到聲源的距離為1.02米
+	distance_mic3 = 0.98  # 假設麥克風3到聲源的距離為0.98米
 
 	# 計算聲速
 	sound_speed = 343  # 聲速 (單位：米/秒)

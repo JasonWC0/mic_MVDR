@@ -5,9 +5,9 @@ from matplotlib.pyplot import MultipleLocator
 import os
 
 # 定義要處理的CSV文件目錄和文件前綴
-TARGET_FILE_NAME = 'MVDR_TDM1_FFT'
+TARGET_FILE_NAME = 'PREPROCESSED_TDM_STEP01_1_FFT/mic1'
 INPUT_DIR = f'././{TARGET_FILE_NAME}'
-PROCESS_CSV_FILE_NAME = 'micAll_wear{}_filtered.csv'
+PROCESS_CSV_FILE_NAME = 'wear{}-1_timeDM.csv'
 output_dir = f'././{TARGET_FILE_NAME}_SMOOTH'
 
 # 定義平滑和下採樣的點數
