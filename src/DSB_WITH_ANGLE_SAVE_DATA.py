@@ -31,9 +31,9 @@ def compute_energy(signal):
 cutoff_frequency = 20000  # 20 kHz
 
 # 定義每個麥克風到聲源的距離 (單位：米)
-distance_mic1 = 1.0  # 假設麥克風1到聲源的距離為1米
-distance_mic2 = 1.0  # 假設麥克風2到聲源的距離為1米
-distance_mic3 = 1.0  # 假設麥克風3到聲源的距離為1米
+distance_mic1 = 0.98  # 假設麥克風1到聲源的距離為0.98米
+distance_mic2 = 1.02  # 假設麥克風2到聲源的距離為1.02米
+distance_mic3 = 0.98  # 假設麥克風3到聲源的距離為0.98米
 
 # 計算聲速
 sound_speed = 343  # 聲速 (單位：米/秒)
@@ -42,8 +42,8 @@ sound_speed = 343  # 聲速 (單位：米/秒)
 for j in range(1, 2):  # 外層迴圈處理不同數據組
     print(f'處理第 {j} 組數據...')
     
-    INPUT_FOLDER = f'./PREPROCESSED_TDM_STEP01_{j}/'
-    OUTPUT_FOLDER = f'./DSB_TDM{j}/'
+    INPUT_FOLDER = f'./PREPROCESSED_TDM{j}_ANGLE_30_STEP01/'
+    OUTPUT_FOLDER = f'./DSB_TDM{j}_ANGLE_30/'
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
     for i in range(1, 21):  # 根據需要更改範圍
@@ -88,7 +88,7 @@ for j in range(1, 2):  # 外層迴圈處理不同數據組
 
         # 儲存 DSB 波束形成後的信號到 CSV 文件
         dsb_result = pd.DataFrame({'Time': data_mic1['Time'], 'Amplitude': beamformed_signal})
-        output_csv_path = os.path.join(OUTPUT_FOLDER, f'wear{i}_DSB_result.csv')
+        output_csv_path = os.path.join(OUTPUT_FOLDER, f'micAll_wear{i}_filtered.csv')
         dsb_result.to_csv(output_csv_path, index=False)
 
         print(f'DSB 波束形成的結果已保存到: {output_csv_path}')
