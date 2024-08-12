@@ -42,8 +42,8 @@ sound_speed = 343  # 聲速 (單位：米/秒)
 for j in range(1, 2):  # 外層迴圈處理不同數據組
     print(f'處理第 {j} 組數據...')
     
-    INPUT_FOLDER = f'./PREPROCESSED_TDM{j}_ANGLE_30_STEP01/'
-    OUTPUT_FOLDER = f'./DSB_TDM{j}_ANGLE_30/'
+    INPUT_FOLDER = f'./PREPROCESSED_TDM_ANGLE_30_STEP01_{j}/'
+    OUTPUT_FOLDER = f'./DSB_ANDLE_30_TDM{j}/'
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
     for i in range(1, 21):  # 根據需要更改範圍
