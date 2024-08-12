@@ -1,6 +1,9 @@
 import numpy as np
+import pandas as pd
+import glob
+import matplotlib.pyplot as plt
 
-# 定義所有的函式
+# 定義統計分析的函式
 def EachClass_Mean(Signal):
     Class_Mean = []    
     for c in range(len(Signal)):
@@ -44,34 +47,38 @@ def Index_CostFunction(Signal, Ri, Rc):
     Cost_J = Rc / R if R != 0 else float('inf')
     return Cost_J
 
-# 假設的信號數據
-Signal = [
-    np.array([[0.1, 0.2, 0.3]]),
-    np.array([[0.4, 0.5, 0.6]]),
-    np.array([[0.7, 0.8, 0.9]])
-]
+# 讀取 CSV 文件並處理數據
+def read_and_process_files(pattern):
+    file_paths = glob.glob(pattern)
+    data_list = []
+    for file_path in file_paths:
+        df = pd.read_csv(file_path)
+        data_list.append(df['Amplitude'].values)
+    return [np.array(data).reshape(1, -1) for data in data_list]
 
-# 計算每個類別的平均值
-Class_Mean = EachClass_Mean(Signal)
+# 使用 glob 模式匹配文件路徑
+signals = read_and_process_files('./DSB_TDM1/micAll_wear*_filtered.csv')
 
-# 設定每個類別的先驗概率
-Pi = [1/3, 1/3, 1/3]
-
-# 計算系統類別平均
+# 應用統計函式
+Class_Mean = EachClass_Mean(signals)
+Pi = [1/len(signals)] * len(signals)  # 假設每個類別的概率相等
 System_Mean = System_ClassMean(Class_Mean, Pi)
+Ri = Scatter_WithinClass(signals, Class_Mean)
+Rc = Scatter_betweenClass(signals, System_Mean, Class_Mean, Pi)
+Cost_J = Index_CostFunction(signals, Ri, Rc)
 
-# 計算類內散射
-Ri = Scatter_WithinClass(Signal, Class_Mean)
-
-# 計算類間散射
-Rc = Scatter_betweenClass(Signal, System_Mean, Class_Mean, Pi)
-
-# 計算成本函數指數
-Cost_J = Index_CostFunction(Signal, Ri, Rc)
-
-# 打印結果
+# 輸出結果
 print("每個類別的平均值:", Class_Mean)
 print("系統類別平均:", System_Mean)
 print("類內散射:", Ri)
 print("類間散射:", Rc)
 print("成本函數指數:", Cost_J)
+
+# 可視化一個信號的數據
+plt.figure(figsize=(10, 6))
+plt.plot(signals[0][0], label='Amplitude of Signal 1')
+plt.title('Signal Amplitude Over Time')
+plt.xlabel('Sample Index')
+plt.ylabel('Amplitude')
+plt.legend()
+plt.show()
