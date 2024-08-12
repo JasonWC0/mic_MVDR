@@ -27,10 +27,10 @@ for j in range(1, 2):  # Loop for j from 1 to 4
 	print(f'處理第 {j} 組數據...')
 
 	# 設置輸入文件夾
-	INPUT_FOLDER = f'./PREPROCESSED_TDM{j}_ANGLE_30_STEP01/'
+	INPUT_FOLDER = f'./PREPROCESSED_TDM_ANGLE_30_STEP01_{j}/'
 
 	# 設置輸出文件夾
-	OUTPUT_FOLDER = f'./MVDR_TDM{j}_ANGLE_30/'
+	OUTPUT_FOLDER = f'./MVDR_ANDLE_30_TDM{j}/'
 
 	os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 	# 定義每個麥克風到聲源的距離 (單位：米)
