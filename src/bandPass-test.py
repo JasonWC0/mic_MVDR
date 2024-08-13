@@ -42,7 +42,7 @@ def butter_highpass_filter(data, cutoff, fs, order=5):
 
 # 設定參數
 lowcut = 20000.0  # 低通濾波器的截止頻率
-highcut = 10 # 高通濾波器的截止頻率
+highcut = 20 # 高通濾波器的截止頻率
 fs = 1 / (time[1] - time[0])  # 計算取樣頻率
 
 # 應用濾波器

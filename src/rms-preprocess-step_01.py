@@ -44,11 +44,11 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
 
 # Iterate over i from 1 to 4
 for i in range(1, 2):
-    DATA_FOLDER = f'./TDM{i}/'
-    OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_STEP01_{i}/'
-    HIGH_PASS_CUTOFF = 10
+    DATA_FOLDER = f'./TDM{i}_ANGLE_30/'
+    OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_ANGLE_30_STEP01_{i}/'
+    HIGH_PASS_CUTOFF = 20
     LOW_PASS_CUTOFF = 20000
-    FS=51200
+    FS = 51200
     
     # Define the mic_patterns for each i
     mic_patterns = {
@@ -83,8 +83,8 @@ for i in range(1, 2):
         data3['Amplitude'] = data3['Amplitude'] * (rms1 / rms3)
 
         print('rms1',rms1)
-        print('rms2',np.sqrt(np.mean(data2['Amplitude']**2)))
-        print('rms3',np.sqrt(np.mean(data3['Amplitude']**2)))
+        print('rms2',rms2)
+        print('rms3',rms3)
         
         data1['Amplitude'] = bandpass_filter(data1['Amplitude'], LOW_PASS_CUTOFF, HIGH_PASS_CUTOFF, FS)
         data2['Amplitude'] = bandpass_filter(data2['Amplitude'], LOW_PASS_CUTOFF, HIGH_PASS_CUTOFF, FS)
