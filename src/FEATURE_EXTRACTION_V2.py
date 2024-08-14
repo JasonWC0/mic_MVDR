@@ -58,7 +58,9 @@ def main():
     positive_features = extract_features(positive_data)
 
     # 計算 J 值
-    j_values=dj.Scatter_Criterion([negative_features,positive_features],2,0.5)
+    j_values=dj.Scatter_Criterion([[negative_features],[positive_features]],2,0.5)
+    j_values_df = pd.DataFrame({'J Value': j_values})
+    j_values_df.to_csv('j_values.csv', index=False)
     #j_values = calculate_j_values(negative_features, positive_features)
 
     # 繪製 J 值圖表
