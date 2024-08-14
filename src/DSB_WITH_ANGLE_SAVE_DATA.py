@@ -39,7 +39,7 @@ distance_mic3 = 1.00  # 假設麥克風3到聲源的距離為0.98米
 sound_speed = 343  # 聲速 (單位：米/秒)
 
 # 自動化處理多組數據
-for j in range(3, 4):  # 外層迴圈處理不同數據組
+for j in range(1,3):  # 外層迴圈處理不同數據組
     print(f'處理第 {j} 組數據...')
     
     INPUT_FOLDER = f'./PREPROCESSED_STEP01_{j}/'
