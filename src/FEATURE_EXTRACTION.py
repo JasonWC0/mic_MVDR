@@ -57,7 +57,9 @@ def main():
 
     # 計算 J 值
     j_values = calculate_j_values(negative_features, positive_features)
-
+	# 將 J 值寫入 CSV 檔案
+    j_values_df = pd.DataFrame({ 'Frequency': range(len(j_values)),'J Value': j_values})
+    j_values_df.to_csv('j_values.csv', index=False)
     # 繪製 J 值圖表
     plt.figure(figsize=(10, 6))
     plt.plot(j_values)
