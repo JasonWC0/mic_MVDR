@@ -63,7 +63,7 @@ def main():
     plt.plot(j_values)
     plt.xlabel('Feature Index (Frequency)')
     plt.ylabel('J Value')
-    plt.xlim(0,20000)
+    plt.xlim(0,)
     plt.ylim(0,) 
     plt.title('J Value for Each Frequency Feature')
     plt.grid(True)
@@ -71,8 +71,8 @@ def main():
 
     # 選取 J 值最大的特徵
     top_n = 2  # 根據需求選擇最大的 n 個特徵
-    top_features_indices = np.argsort(j_values)[-top_n:]
-
+    top_features_indices = np.argsort(j_values[0:20000])[-top_n:]
+    print('two_max_j_peak',top_features_indices)
     # 準備訓練數據
     X = np.vstack((negative_features[:, top_features_indices], positive_features[:, top_features_indices]))
     y = np.hstack((np.zeros(len(negative_features)), np.ones(len(positive_features))))
