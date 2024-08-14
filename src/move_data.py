@@ -3,11 +3,8 @@ import shutil
 
 def copy_and_rename_csv_files(src_folder, dest_folder, start_index, end_index,output_filename_template):
 	# 如果目標資料夾存在，則先刪除它
-    if os.path.exists(dest_folder):
-        shutil.rmtree(dest_folder)
-
-	# 建立目標資料夾
-    os.makedirs(dest_folder)
+    if not os.path.exists(dest_folder):
+        os.makedirs(dest_folder)
 
     # 獲取來源資料夾中的所有檔案名稱，並進行排序以確保順序一致
     files = sorted([f for f in os.listdir(src_folder) if f.endswith('.csv')])
@@ -28,8 +25,8 @@ def copy_and_rename_csv_files(src_folder, dest_folder, start_index, end_index,ou
 
 # 使用範例
 source_folder = './MVDR_TDM1'
-destination_folder = './WEAR_OUT_NEGATIVE/'
-start_index = 10  # 起始檔案的索引，從1開始
+destination_folder = './WEAR_OUT_POSITIVE/'
+start_index = 15  # 起始檔案的索引，從1開始
 end_index = 18    # 結束檔案的索引，包含這一個
-output_filename_template='wear{}-1_timeDM.csv'
+output_filename_template='wear{}-1_timeDM1.csv'
 copy_and_rename_csv_files(source_folder, destination_folder, start_index, end_index,output_filename_template)

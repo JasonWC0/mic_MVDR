@@ -43,9 +43,9 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     return filtered_bandpass
 
 # Iterate over i from 1 to 4
-for i in range(1, 2):
-    DATA_FOLDER = f'./TDM{i}_ANGLE_30/'
-    OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_ANGLE_30_STEP01_{i}/'
+for i in range(2, 5):
+    DATA_FOLDER = f'./TDM{i}/'
+    OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_STEP01_{i}/'
     HIGH_PASS_CUTOFF = 20
     LOW_PASS_CUTOFF = 20000
     FS = 51200

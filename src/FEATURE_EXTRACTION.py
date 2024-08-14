@@ -63,6 +63,8 @@ def main():
     plt.plot(j_values)
     plt.xlabel('Feature Index (Frequency)')
     plt.ylabel('J Value')
+    plt.xlim(0,20000)
+    plt.ylim() 
     plt.title('J Value for Each Frequency Feature')
     plt.grid(True)
     plt.show()
