@@ -24,9 +24,9 @@ def copy_and_rename_csv_files(src_folder, dest_folder, start_index, end_index,ou
         print(f"Copied and renamed {files[i]} to {new_filename} in {dest_folder}")
 
 # 使用範例
-source_folder = './MVDR_TDM2'
+source_folder = './MVDR_TDM1'
 destination_folder = './WEAR_OUT_NEGATIVE/'
 start_index = 1  # 起始檔案的索引，從1開始
 end_index = 4    # 結束檔案的索引，包含這一個
-output_filename_template='wear{}-1_timeDM2.csv'
+output_filename_template='wear{}-1_timeDM1.csv'
 copy_and_rename_csv_files(source_folder, destination_folder, start_index, end_index,output_filename_template)
