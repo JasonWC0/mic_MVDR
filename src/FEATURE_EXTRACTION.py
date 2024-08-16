@@ -44,8 +44,8 @@ def calculate_j_values(negative_features, positive_features):
 # 主程序
 def main():
     # 替換為實際的路徑
-    negative_folder_path = './WEAR_OUT_NEGATIVE'  # 替換成你的路徑
-    positive_folder_path = './WEAR_OUT_POSITIVE'  # 替換成你的路徑
+    negative_folder_path = './WEAR_OUT_NEGATIVE1'  # 替換成你的路徑
+    positive_folder_path = './WEAR_OUT_POSITIVE1'  # 替換成你的路徑
 
     # 讀取資料
     negative_data = load_data(negative_folder_path)
@@ -59,13 +59,13 @@ def main():
     j_values = calculate_j_values(negative_features, positive_features)
 	# 將 J 值寫入 CSV 檔案
     j_values_df = pd.DataFrame({ 'Frequency': range(len(j_values)),'J Value': j_values})
-    j_values_df.to_csv('j_values.csv', index=False)
+    j_values_df.to_csv('j_values_DSB.csv', index=False)
     # 繪製 J 值圖表
     plt.figure(figsize=(10, 6))
     plt.plot(j_values)
     plt.xlabel('Feature Index (Frequency)')
     plt.ylabel('J Value')
-    plt.xlim(0,)
+    plt.xlim(0,20000)
     plt.ylim(0,) 
     plt.title('J Value for Each Frequency Feature')
     plt.grid(True)
