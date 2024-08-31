@@ -45,17 +45,27 @@ def calculate_j_values(negative_features, positive_features):
 # 主程序
 def main():
     # 替換為實際的路徑
-    negative_folder_path = './WEAR_OUT_NEGATIVE1'  # 替換成你的路徑
-    positive_folder_path = './WEAR_OUT_POSITIVE1'  # 替換成你的路徑
-
+    negative_folder_path = './WEAR_OUT_NEGATIVE_DSB'  # 替換成你的路徑
+    positive_folder_path = './WEAR_OUT_POSITIVE_DSB'  # 替換成你的路徑
+    negative_folder_path_45deg = 'WEAR_OUT_NEGATIVE_DSB30deg'
+    positive_folder_path_45deg = 'WEAR_OUT_POSITIVE_DSB30deg'
+    negative_folder_path_90deg = 'WEAR_OUT_NEGATIVE_DSB30deg'
+    positive_folder_path_90deg = 'WEAR_OUT_POSITIVE_DSB30deg'
     # 讀取資料
     negative_data = load_data(negative_folder_path)
     positive_data = load_data(positive_folder_path)
+    negative_data_45deg = load_data(negative_folder_path_45deg)
+    positive_data_45deg = load_data(positive_folder_path_45deg)
+    negative_data_90deg = load_data(negative_folder_path_90deg)
+    positive_data_90deg = load_data(positive_folder_path_90deg)
 
     # 提取特徵
     negative_features = extract_features(negative_data)
     positive_features = extract_features(positive_data)
-
+    negative_features_45deg = extract_features(negative_data_45deg)
+    positive_features_45deg = extract_features(positive_data_45deg)
+    negative_features_90deg = extract_features(negative_data_90deg)
+    positive_features_90deg = extract_features(positive_data_90deg)
     # 計算 J 值
     j_values = calculate_j_values(negative_features, positive_features)
 	# 將 J 值寫入 CSV 檔案
@@ -77,20 +87,33 @@ def main():
     top_features_indices = np.argsort(j_values[0:20000])[-top_n:]
     print('two_max_j_peak',top_features_indices)
     # 準備訓練數據
-    X = np.vstack((negative_features[:, top_features_indices], positive_features[:, top_features_indices]))
+    X = np.vstack((negative_features[:,top_features_indices], positive_features[:, top_features_indices]))
     y = np.hstack((np.zeros(len(negative_features)), np.ones(len(positive_features))))
-
+    X_45deg = np.vstack((negative_features_45deg[:,top_features_indices], positive_features_45deg[:, top_features_indices]))
+    X_90deg = np.vstack((negative_features_90deg[:,top_features_indices], positive_features_90deg[:, top_features_indices]))
+    y_45deg = np.hstack((np.zeros(len(negative_features_45deg)), np.ones(len(positive_features_45deg))))
+    y_90deg = np.hstack((np.zeros(len(negative_features_90deg)), np.ones(len(positive_features_90deg))))
     # 訓練 LDA 模型
     lda = LDA()
+    lda.get_params({'covariance_estimator': None, 'n_components': None, 'priors': None, 'shrinkage': None, 'solver': 'svd', 'store_covariance': False, 'tol': 0.0001})
     lda.fit(X, y)
 
     # 測試模型
     predictions = lda.predict(X)
-   
+    predictions_45deg = lda.predict(X_45deg)
+    predictions_90deg = lda.predict(X_90deg)
     # 計算準確度
-    print(confusion_matrix(predictions, y))        
     accuracy = np.mean(predictions == y)
+    accuracy_45deg = np.mean(predictions_45deg == y_45deg)
+    accuracy_90deg = np.mean(predictions_90deg == y_90deg)
+
     print(f'Classification accuracy: {accuracy:.2f}')
+    print(confusion_matrix(predictions, y)) 
+    print(f'Classification accuracy 45deg: {accuracy_45deg:.2f}')
+    print(confusion_matrix(predictions_45deg, y_45deg)) 
+    print(f'Classification accuracy 90deg: {accuracy_90deg:.2f}')
+    print(confusion_matrix(predictions_90deg, y_90deg))  
+    # print(lda.get_params())
 
 if __name__ == "__main__":
     main()

@@ -86,10 +86,10 @@ for i in range(1, 2):
             
         data1['Amplitude'] = data1['Amplitude'] / rms1
         # Normalize mic2 using mic1's current RMS
-        data2['Amplitude'] = data2['Amplitude'] /rms2
+        data2['Amplitude'] = data2['Amplitude'] / rms2
         
         # Normalize mic3 using mic1's current RMS
-        data3['Amplitude'] = data3['Amplitude'] * rms3
+        data3['Amplitude'] = data3['Amplitude'] / rms3
 
         print('rms1',rms1)
         print('rms2',rms2)
