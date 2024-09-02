@@ -11,8 +11,8 @@ SPLIT_DURATION = 1
 
 # Iterate over i from 1 to 2 (adjust the range as needed)
 for i in range(1, 2):
-    DATA_FOLDER = f'./LONG_TDM{i}/'
-    OUTPUT_BASE_FOLDER = f'./TDM_V2_{i}/'
+    DATA_FOLDER = f'./LONG_TDM_{i}/'
+    OUTPUT_BASE_FOLDER = f'./TDM_CUT_{i}/'
     
     # Ensure the output folders exist
     os.makedirs(os.path.join(OUTPUT_BASE_FOLDER, 'mic1'), exist_ok=True)
@@ -21,7 +21,7 @@ for i in range(1, 2):
     
     counter = 1
     rms1 = rms2 = rms3 = 0
-    dataLength = 1
+    dataLength = 5
 
     for j in range(1, dataLength + 1):
         print(f"Processing i={i}, j={j}")
@@ -43,9 +43,9 @@ for i in range(1, 2):
 
 		# Iterate over the split data and save each part
         for k in range(len(split_data1)):
-            output_file_path_mic1_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic1', f'part{k+1}_{os.path.basename(file_path_mic1)}')
-            output_file_path_mic2_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic2', f'part{k+1}_{os.path.basename(file_path_mic2)}')
-            output_file_path_mic3_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic3', f'part{k+1}_{os.path.basename(file_path_mic3)}')
+            output_file_path_mic1_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic1', f'{os.path.basename(file_path_mic1)}_{k+1}s')
+            output_file_path_mic2_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic2', f'{os.path.basename(file_path_mic2)}_{k+1}s')
+            output_file_path_mic3_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic3', f'{os.path.basename(file_path_mic3)}_{k+1}s')
 			
             split_data1[k].to_csv(output_file_path_mic1_part, index=False, header=True)
             split_data2[k].to_csv(output_file_path_mic2_part, index=False, header=True)
