@@ -24,10 +24,10 @@ def copy_and_rename_csv_files(src_folder, dest_folder, start_index, end_index, i
         print(f"Copied and renamed {input_filename} to {new_filename} in {dest_folder}")
 
 # 使用範例
-source_folder = './DSB_TDM4'
-destination_folder = './WEAR_OUT_POSITIVE1/'
-start_index = 15  # 起始檔案的索引，從1開始
-end_index = 18    # 結束檔案的索引，包含這一個
-input_filename_template = 'micAll_wear{}_filtered.csv'
-output_filename_template = 'wear{}-1_timeDM4.csv'
+source_folder = './PREPROCESSED_TDM_ANGLE_30_STEP01_1/mic1'
+destination_folder = './WEAR_OUT_NEGATIVE_30deg/'
+start_index = 1  # 起始檔案的索引，從1開始
+end_index = 4    # 結束檔案的索引，包含這一個
+input_filename_template = 'wear{}-1_timeDM.csv'
+output_filename_template = 'wear{}-1_timeDM1.csv'
 copy_and_rename_csv_files(source_folder, destination_folder, start_index, end_index, input_filename_template, output_filename_template)
