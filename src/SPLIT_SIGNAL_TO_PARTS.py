@@ -4,6 +4,7 @@ import os
 
 # Define the pattern for your input files
 INPUT_FILE_PATTERN = 'wear{}-{}_timeDM.csv'
+OUTPUT_FILE_PATTERN = 'wear{}-{}_timeDM_{}s.csv'
 HIGH_PASS_CUTOFF = 1
 LOW_PASS_CUTOFF = 20000
 FS = 51200
@@ -20,7 +21,6 @@ for i in range(1, 2):
     os.makedirs(os.path.join(OUTPUT_BASE_FOLDER, 'mic3'), exist_ok=True)
     
     counter = 1
-    rms1 = rms2 = rms3 = 0
     dataLength = 5
 
     for j in range(1, dataLength + 1):
@@ -32,9 +32,9 @@ for i in range(1, 2):
         file_path_mic3 = os.path.join(DATA_FOLDER, 'mic3', INPUT_FILE_PATTERN.format(j, 3))
         
         # Read the data for each mic
-        data1 = pd.read_csv(file_path_mic1, header=None, names=['Time', 'Amplitude'])
-        data2 = pd.read_csv(file_path_mic2, header=None, names=['Time', 'Amplitude'])
-        data3 = pd.read_csv(file_path_mic3, header=None, names=['Time', 'Amplitude'])
+        data1 = pd.read_csv(file_path_mic1, header=None, names=['Time', 'Amplitude'],skiprows=1)
+        data2 = pd.read_csv(file_path_mic2, header=None, names=['Time', 'Amplitude'],skiprows=1)
+        data3 = pd.read_csv(file_path_mic3, header=None, names=['Time', 'Amplitude'],skiprows=1)
         
 		# Split the data into parts based on split duration
         split_data1 = np.array_split(data1, int(data1.shape[0] / (FS * SPLIT_DURATION)))
@@ -43,22 +43,18 @@ for i in range(1, 2):
 
 		# Iterate over the split data and save each part
         for k in range(len(split_data1)):
-            output_file_path_mic1_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic1', f'{os.path.basename(file_path_mic1)}_{k+1}s')
-            output_file_path_mic2_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic2', f'{os.path.basename(file_path_mic2)}_{k+1}s')
-            output_file_path_mic3_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic3', f'{os.path.basename(file_path_mic3)}_{k+1}s')
-			
+            output_file_path_mic1_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic1', OUTPUT_FILE_PATTERN.format(j, 1, k+1))
+            output_file_path_mic2_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic2', OUTPUT_FILE_PATTERN.format(j, 2, k+1))
+            output_file_path_mic3_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic3', OUTPUT_FILE_PATTERN.format(j, 3, k+1))
+            
+			# Normalize the time values
+            split_data1[k]['Time'] = split_data1[k]['Time'] - min(split_data1[k]['Time'])
+            split_data2[k]['Time'] = split_data2[k]['Time'] - min(split_data2[k]['Time'])
+            split_data3[k]['Time'] = split_data3[k]['Time'] - min(split_data3[k]['Time'])
+            
             split_data1[k].to_csv(output_file_path_mic1_part, index=False, header=True)
             split_data2[k].to_csv(output_file_path_mic2_part, index=False, header=True)
             split_data3[k].to_csv(output_file_path_mic3_part, index=False, header=True)
-        ## Save the normalized data
-        #output_file_path_mic1 = os.path.join(OUTPUT_BASE_FOLDER, 'mic1', os.path.basename(file_path_mic1))
-        #output_file_path_mic2 = os.path.join(OUTPUT_BASE_FOLDER, 'mic2', os.path.basename(file_path_mic2))
-        #output_file_path_mic3 = os.path.join(OUTPUT_BASE_FOLDER, 'mic3', os.path.basename(file_path_mic3))
-        
-        #data1.to_csv(output_file_path_mic1, index=False, header=True)
-        #data2.to_csv(output_file_path_mic2, index=False, header=True)
-        #data3.to_csv(output_file_path_mic3, index=False, header=True)
         
         counter += 1
-        print(f'rms1: {rms1}, rms2: {rms2}, rms3: {rms3}')
 
