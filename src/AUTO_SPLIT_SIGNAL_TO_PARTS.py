@@ -5,7 +5,7 @@ from scipy.signal import hilbert
 import os
 
 # 讀取 CSV 文件
-file_path = './S6500_5/1.csv'
+file_path = './RAW_TDM_DATA/mic1/1.csv'
 START_INDEX=0
 output_folder_mic1_template = './LONG_TDM_1/mic1/'
 output_folder_mic2_template = './LONG_TDM_1/mic2/'
