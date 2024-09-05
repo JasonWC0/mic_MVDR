@@ -4,8 +4,8 @@ import pandas as pd
 from scipy.fft import fft
 
 # 資料夾路徑
-input_folder = './MVDR_ANDLE_30_TDM1'
-output_folder = './MVDR_ANDLE_30_TDM1_FFT'
+input_folder = './RMS_TDM_5/mic3'
+output_folder = './TDM5_FFT/mic3'
 
 # 確保輸出資料夾存在
 os.makedirs(output_folder, exist_ok=True)
