@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import os
-from scipy.fft import fft
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix
@@ -11,15 +10,6 @@ def load_data(folder_path):
     files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
     data_list = [pd.read_csv(os.path.join(folder_path, file)) for file in files]
     return data_list
-
-# 提取 FFT 特徵
-def extract_features(data_list, signal_column='Amplitude'):
-    features = []
-    for data in data_list:
-        signal = data[signal_column].values  # 使用 Amplitude 作為訊號
-        fft_values = np.abs(fft(signal))
-        features.append(fft_values[:len(fft_values)//2])  # 取前半段的頻譜數據
-    return np.array(features)
 
 # 計算群組分離準則 (J 值)
 def calculate_j_values(negative_features, positive_features):
@@ -52,15 +42,17 @@ def main():
     negative_data = load_data(negative_folder_path)
     positive_data = load_data(positive_folder_path)
 
-    # 提取特徵
-    negative_features = extract_features(negative_data)
-    positive_features = extract_features(positive_data)
+    # 假設頻率數據已經在 Amplitude 欄位中
+    negative_features = np.array([data['Amplitude'].values for data in negative_data])
+    positive_features = np.array([data['Amplitude'].values for data in positive_data])
 
     # 計算 J 值
     j_values = calculate_j_values(negative_features, positive_features)
-	# 將 J 值寫入 CSV 檔案
+	
+    # 將 J 值寫入 CSV 檔案
     j_values_df = pd.DataFrame({ 'Frequency': range(len(j_values)),'J Value': j_values})
     j_values_df.to_csv('j_values_DSB.csv', index=False)
+	
     # 繪製 J 值圖表
     plt.figure(figsize=(10, 6))
     plt.plot(j_values)
@@ -75,7 +67,8 @@ def main():
     # 選取 J 值最大的特徵
     top_n = 2  # 根據需求選擇最大的 n 個特徵
     top_features_indices = np.argsort(j_values[0:20000])[-top_n:]
-    print('two_max_j_peak',top_features_indices)
+    print('two_max_j_peak', top_features_indices)
+    
     # 準備訓練數據
     X = np.vstack((negative_features[:, top_features_indices], positive_features[:, top_features_indices]))
     y = np.hstack((np.zeros(len(negative_features)), np.ones(len(positive_features))))
