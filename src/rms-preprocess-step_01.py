@@ -43,18 +43,18 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     return filtered_bandpass
 
 # Iterate over i from 1 to 4
-for i in range(2, 5):
-    DATA_FOLDER = f'./TDM{i}/'
-    OUTPUT_BASE_FOLDER = f'./PREPROCESSED_TDM_STEP01_{i}/'
+for i in range(5, 6):
+    DATA_FOLDER = f'./TDM_CUT_{i}/'
+    OUTPUT_BASE_FOLDER = f'./RMS_TDM_{i}/'
     HIGH_PASS_CUTOFF = 20
     LOW_PASS_CUTOFF = 20000
     FS = 51200
     
     # Define the mic_patterns for each i
     mic_patterns = {
-        'mic1': f'{DATA_FOLDER}mic1/wear*-1_timeDM.csv',
-        'mic2': f'{DATA_FOLDER}mic2/wear*-2_timeDM.csv',
-        'mic3': f'{DATA_FOLDER}mic3/wear*-3_timeDM.csv'
+        'mic1': f'{DATA_FOLDER}mic1/wear*-1_timeDM_*s.csv',
+        'mic2': f'{DATA_FOLDER}mic2/wear*-2_timeDM_*s.csv',
+        'mic3': f'{DATA_FOLDER}mic3/wear*-3_timeDM_*s.csv'
     }
 
     # Ensure the output folders exist
@@ -69,16 +69,16 @@ for i in range(2, 5):
     
     for f1, f2, f3 in zip(mic1_files, mic2_files, mic3_files):
         # Read and calculate RMS for mic1 current file
-        data1 = pd.read_csv(f1, header=None, names=['Time', 'Amplitude'])
+        data1 = pd.read_csv(f1, header=None, names=['Time', 'Amplitude'], skiprows=1)
         rms1 = np.sqrt(np.mean(data1['Amplitude']**2))
 
         # Normalize mic2 using mic1's current RMS
-        data2 = pd.read_csv(f2, header=None, names=['Time', 'Amplitude'])
+        data2 = pd.read_csv(f2, header=None, names=['Time', 'Amplitude'], skiprows=1)
         rms2 = np.sqrt(np.mean(data2['Amplitude']**2))
         data2['Amplitude'] = data2['Amplitude'] * (rms1 / rms2)
 
         # Normalize mic3 using mic1's current RMS
-        data3 = pd.read_csv(f3, header=None, names=['Time', 'Amplitude'])
+        data3 = pd.read_csv(f3, header=None, names=['Time', 'Amplitude'], skiprows=1)
         rms3 = np.sqrt(np.mean(data3['Amplitude']**2))
         data3['Amplitude'] = data3['Amplitude'] * (rms1 / rms3)
 
