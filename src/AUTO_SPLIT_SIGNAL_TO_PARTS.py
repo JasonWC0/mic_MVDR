@@ -5,6 +5,7 @@ from scipy.signal import hilbert
 import os
 
 # 讀取 CSV 文件
+
 file_path = './S6500_30deg_3/6.csv'
 START_INDEX= 25         #第2個FILE要加5，第3個要加10，以此類推(取決於整段訊號有幾個包絡)
 output_folder_mic1_template = './LONG_TDM_30deg_3/mic1/'

@@ -45,9 +45,10 @@ for i in range(5, 6):
         for k in range(len(split_data1)):
             output_file_path_mic1_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic1', OUTPUT_FILE_PATTERN.format(j, 1, k+1))
             output_file_path_mic2_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic2', OUTPUT_FILE_PATTERN.format(j, 2, k+1))
-            output_file_path_mic3_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic3', OUTPUT_FILE_PATTERN.format(j, 3, k+1))
-            
-   # Normalize the time values
+            output_file_path_mic3_part = os.path.join(OUTPUT_BASE_FOLDER, 'mic3', OUTPUT_FILE_PATTERN.format(j, 3, k+1))           
+
+			# Normalize the time values
+
             split_data1[k]['Time'] = split_data1[k]['Time'] - min(split_data1[k]['Time'])
             split_data2[k]['Time'] = split_data2[k]['Time'] - min(split_data2[k]['Time'])
             split_data3[k]['Time'] = split_data3[k]['Time'] - min(split_data3[k]['Time'])
