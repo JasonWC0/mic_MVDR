@@ -4,11 +4,19 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import MultipleLocator
 import os
 
-# 定義要處理的CSV文件目錄和文件前綴
-TARGET_FILE_NAME = 'MVDR_ANDLE_30_TDM1_FFT'
+# # 定義要處理的CSV文件目錄和文件前綴
+# TARGET_FILE_NAME = 'MVDR_ANDLE_30_TDM1_FFT'
+# INPUT_DIR = f'././{TARGET_FILE_NAME}'
+# PROCESS_CSV_FILE_NAME = 'micAll_wear{}_filtered.csv'
+# output_dir = f'././{TARGET_FILE_NAME}_SMOOTH'
+
+# 原始未濾波 路徑
+TARGET_FILE_NAME = 'TDM5_FFT/mic1'
 INPUT_DIR = f'././{TARGET_FILE_NAME}'
-PROCESS_CSV_FILE_NAME = 'micAll_wear{}_filtered.csv'
+PROCESS_CSV_FILE_NAME = 'wear{}-1_timeDM_{}s.csv'
 output_dir = f'././{TARGET_FILE_NAME}_SMOOTH'
+
+
 
 # 定義平滑和下採樣的點數
 point = 100
